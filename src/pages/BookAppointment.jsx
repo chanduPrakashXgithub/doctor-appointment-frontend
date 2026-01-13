@@ -38,6 +38,7 @@ function BookAppointment() {
 
   const handleBook = async (e) => {
     e.preventDefault();
+    if (loading) return;
     setLoading(true);
     const startTime = formatTime(time);
     const endTime = formatTime(add30Minutes(time));
@@ -58,8 +59,11 @@ function BookAppointment() {
         }
       });
     } catch (err) {
-      console.error(err);
-      alert("Booking failed");
+      if (err?.response?.data?.message) {
+        alert(err.response.data.message);
+      } else {
+        alert("Booking failed");
+      }
     }
     setLoading(false);
   };

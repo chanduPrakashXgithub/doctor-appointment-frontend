@@ -1,6 +1,7 @@
 import api from './api';
 
 const book = async (data) => {
+  // propagate error for frontend to handle
   const res = await api.post('/appointments/book', data);
   return res.data;
 };
